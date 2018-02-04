@@ -9,9 +9,10 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -23,13 +24,11 @@ import com.matyas.krista.pylt.Calculator.Calculator;
 import com.matyas.krista.pylt.Commons.AppColors;
 import com.matyas.krista.pylt.Database.AppDatabase;
 import com.matyas.krista.pylt.EIObjects.EIObject;
-import com.matyas.krista.pylt.EIObjects.EIObjectDao_Impl;
-import com.matyas.krista.pylt.EIObjects.EIType;
 import com.matyas.krista.pylt.EIObjects.EITag;
+import com.matyas.krista.pylt.EIObjects.EIType;
 import com.matyas.krista.pylt.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,10 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        GenerateExample.generate();
         loadData();
-
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -56,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         fab.getDrawable().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
         createPieChart(EIType.OVERALL);
+        setVisibility();
         setValues();
 
     }
@@ -133,6 +130,52 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void setVisibility() {
+        View[] views = {findViewById(R.id.edit_balance), findViewById(R.id.edit_income), findViewById(R.id.edit_expenses)};
+        for (View view : views) {
+            view.setVisibility(View.GONE);
+        }
+        Button editBalance = (Button) views[0];
+        Button editIncome = (Button) views[1];
+        Button editExpenses = (Button) views[2];
+
+        editBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("key", 0);
+                intent.putExtras(b);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        editIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("key", 1);
+                intent.putExtras(b);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        editExpenses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("key", 2);
+                intent.putExtras(b);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -150,6 +193,14 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if (id == R.id.action_edit) {
+            View[] views = {findViewById(R.id.edit_balance), findViewById(R.id.edit_income), findViewById(R.id.edit_expenses)};
+            for (View view : views) {
+                view.setVisibility(View.VISIBLE);
+                view.animate().alphaBy(100);
+            }
         }
 
         return super.onOptionsItemSelected(item);

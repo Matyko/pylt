@@ -85,6 +85,15 @@ public class EIObject {
         this.tag = tag;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+
 
 
     public static long getFullAmount(EIType eitype) {
@@ -99,5 +108,19 @@ public class EIObject {
 
     public static void setAllObjects(ArrayList<EIObject> allObjects) {
         EIObject.allObjects = allObjects;
+    }
+
+    public static ArrayList<String> getAllObjectsAsStringsByType(EIType eiType) {
+        ArrayList arrayList = new ArrayList(){};
+        for (EIObject o : EIObject.getAllObjects()) {
+            if (o.getEitype().equals(eiType)) {
+                arrayList.add(o.getName() + " " +
+                        o.getEitype().name() + " " +
+                        o.getTag().getName() + " " +
+                        o.getAmount() + " " +
+                        o.getDate());
+            }
+        }
+        return arrayList;
     }
 }

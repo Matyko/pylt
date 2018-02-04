@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,8 @@ import com.matyas.krista.pylt.EIObjects.EIObject;
 import com.matyas.krista.pylt.EIObjects.EITag;
 import com.matyas.krista.pylt.EIObjects.EIType;
 import com.matyas.krista.pylt.R;
+
+import java.util.Arrays;
 
 /**
  * Created by Matyas on 2018.02.03..
@@ -32,15 +35,15 @@ public class NewItemAcivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                try {
+                try {
                     saveNewItem();
                     Intent myIntent = new Intent(NewItemAcivity.this, MainActivity.class);
                     NewItemAcivity.this.startActivity(myIntent);
-//                } catch (Exception e) {
-//                    System.out.println(Arrays.toString(e.getStackTrace()));
-//                    Snackbar.make(view, "You need to fill all fields to save", Snackbar.LENGTH_LONG)
-//                            .setAction("", null).show();
-//                }
+                } catch (Exception e) {
+                    System.out.println(Arrays.toString(e.getStackTrace()));
+                    Snackbar.make(view, "You need to fill all fields to save", Snackbar.LENGTH_LONG)
+                            .setAction("", null).show();
+                }
             }
         });
     }

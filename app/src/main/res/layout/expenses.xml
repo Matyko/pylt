@@ -4,13 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/expensesText"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/expenses"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:fontFamily="sans-serif-condensed"/>
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/expensesText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/expenses"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:fontFamily="sans-serif-condensed"/>
+
+        <Button
+            android:id="@+id/edit_expenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorAccent"
+            android:text="@string/edit" />
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

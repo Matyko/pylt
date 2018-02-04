@@ -8,14 +8,30 @@
     tools:context="com.matyas.krista.pylt.Activities.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:id="@+id/balanceText"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/balance"
-        android:textSize="35sp"
-        android:padding="10dp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-condensed"/>
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/balanceText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/balance"
+            android:textSize="35sp"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"/>
+
+        <Button
+            android:id="@+id/edit_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="67dp"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorAccent"
+            android:text="@string/edit" />
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
