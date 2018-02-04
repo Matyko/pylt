@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -212,14 +214,41 @@ public class MainActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Integer>() {
             @Override
             protected Integer doInBackground(Void... params) {
+//                // deletes all table entries
+//                adb.eiObject().nukeTable();
+                EIObject.getAllObjects().clear();
+                EITag.getTags().clear();
                 EIObject[] eiObjects = adb.eiObject().loadAllObjects();
                 for (EIObject eiObject : eiObjects) {
                     EITag.addTag(eiObject.getTag().getName(), eiObject.getAmount(), eiObject.getEitype());
-                    new EIObject(eiObject.getName(), eiObject.getEitype(), eiObject.getAmount(), eiObject.getTag());
                 }
                 return 1;
             }
         }.execute();
+    }
+
+    private void createDetailedPieChart(List<EIObject> objects) {
+        PieChart chart = (PieChart) findViewById(R.id.chart);
+        long sum = 0;
+        chart.clear();
+        List<PieEntry> entries = new ArrayList<>();
+        for (int i = 0; i < objects.size(); i++) {
+            entries.add(new PieEntry(objects.get(i).getAmount(), objects.get(i).getName()));
+            sum += objects.get(i).getAmount();
+        }
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setValueTextColor(Color.DKGRAY);
+        dataSet.setValueTextSize(15);
+        dataSet.setColors(AppColors.getColors());
+        PieData pieData = new PieData(dataSet);
+        chart.setData(pieData);
+        chart.setEntryLabelColor(Color.DKGRAY);
+        Description description = new Description();
+        description.setText("");
+        chart.setDescription(description);
+        chart.setCenterText(Long.valueOf(sum).toString() + "\n" + "Total");
+        chart.setCenterTextColor(Color.DKGRAY);
+        chart.invalidate();
     }
 }
 

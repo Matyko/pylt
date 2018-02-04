@@ -19,6 +19,7 @@ public class EITag {
     private long amount;
     private EIType type;
     private static List<EITag> tags = new ArrayList<>();
+    private static List<EIObject> objects = new ArrayList<>();
 
     private EITag(String name, long amount, EIType type) {
         this.name = name;
@@ -69,4 +70,13 @@ public class EITag {
         this.type = type;
     }
 
+    public static List<EIObject> getEIObjectsFromTag(EITag tag) {
+        objects.clear();
+        for (EIObject eiObject : EIObject.getAllObjects()) {
+            if (eiObject.getTag() == tag) {
+                objects.add(eiObject);
+            }
+        }
+        return objects;
+    }
 }

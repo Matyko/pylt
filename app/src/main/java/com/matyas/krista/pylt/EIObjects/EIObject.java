@@ -113,7 +113,7 @@ public class EIObject {
     public static ArrayList<String> getAllObjectsAsStringsByType(EIType eiType) {
         ArrayList arrayList = new ArrayList(){};
         for (EIObject o : EIObject.getAllObjects()) {
-            if (o.getEitype().equals(eiType)) {
+            if (o.getEitype().equals(eiType) || eiType.equals(EIType.OVERALL)) {
                 arrayList.add(o.getName() + " " +
                         o.getEitype().name() + " " +
                         o.getTag().getName() + " " +

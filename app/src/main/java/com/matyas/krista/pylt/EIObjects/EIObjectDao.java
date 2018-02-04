@@ -17,12 +17,15 @@ public interface EIObjectDao {
     public void insertEIObject(EIObject... eiObjects);
 
     @Update
-    public void updateEIObject(EIObject... eiObjects);
+    public int updateEIObject(EIObject... eiObjects);
 
     @Delete
     public void deleteObject(EIObject... eiObjects);
 
     @Query("SELECT * FROM EIObject")
     public EIObject[] loadAllObjects();
+
+    @Query("DELETE FROM EIObject")
+    public void nukeTable();
 
 }

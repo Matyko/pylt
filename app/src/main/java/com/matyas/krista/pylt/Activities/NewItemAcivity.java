@@ -6,11 +6,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 
+import com.matyas.krista.pylt.Calculator.Calculator;
 import com.matyas.krista.pylt.Database.AppDatabase;
 import com.matyas.krista.pylt.EIObjects.EIObject;
 import com.matyas.krista.pylt.EIObjects.EITag;
@@ -18,6 +21,7 @@ import com.matyas.krista.pylt.EIObjects.EIType;
 import com.matyas.krista.pylt.R;
 
 import java.util.Arrays;
+import java.util.Calendar;
 
 /**
  * Created by Matyas on 2018.02.03..
@@ -25,18 +29,38 @@ import java.util.Arrays;
 
 public class NewItemAcivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.new_item);
-
         Button saveButton = (Button) findViewById(R.id.save_button);
+
+        Bundle b = getIntent().getExtras();
+        int mode = -1;
+        try {
+            int i = b.getInt("key");
+            TextView textView = (TextView) findViewById(R.id.new_update_item);
+            textView.setText(R.string.edit_item);
+            EditText inputName = (EditText) findViewById(R.id.item_name);
+            inputName.setText(EIObject.getAllObjects().get(i).getName());
+            EditText inputTag = (EditText) findViewById(R.id.item_tag);
+            inputTag.setText(EIObject.getAllObjects().get(i).getTag().getName());
+            EditText inputAmount = (EditText) findViewById(R.id.amount);
+            inputAmount.setText(Long.valueOf(EIObject.getAllObjects().get(i).getAmount()).toString());
+            Switch inputSwitch = (Switch) findViewById(R.id.income_switch);
+            if (EIObject.getAllObjects().get(i).getEitype().equals(EIType.INCOME)) {inputSwitch.setChecked(true);}
+            mode = i;
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+        final int finalMode = mode;
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    saveNewItem();
+                    saveItem(finalMode);
                     Intent myIntent = new Intent(NewItemAcivity.this, MainActivity.class);
                     NewItemAcivity.this.startActivity(myIntent);
                 } catch (Exception e) {
@@ -48,8 +72,20 @@ public class NewItemAcivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent intent = new Intent(NewItemAcivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
     @SuppressLint("StaticFieldLeak")
-    private void saveNewItem() {
+    private void saveItem(int i) {
         final EIType eiType;
         final String name;
         final String tag;
@@ -60,7 +96,6 @@ public class NewItemAcivity extends AppCompatActivity {
         if (name.length() < 1) { throw new RuntimeException("No text was added");}
         EditText inputTag = (EditText) findViewById(R.id.item_tag);
         tag = inputTag.getText().toString();
-
         if (tag.length() < 1) { throw new RuntimeException("No text was added");}
         EditText inputAmount = (EditText) findViewById(R.id.amount);
         amount = Long.valueOf(inputAmount.getText().toString());
@@ -72,15 +107,31 @@ public class NewItemAcivity extends AppCompatActivity {
             eiType = EIType.EXPENSE;
         }
         EITag.addTag(tag, amount, eiType);
-        final AppDatabase adb = AppDatabase.getFileDatabase(getApplicationContext());
-        new AsyncTask<Void, Void, Integer>() {
-            @Override
-            protected Integer doInBackground(Void... params) {
-                adb.eiObject().insertEIObject(new EIObject(name,eiType,amount,EITag.getTag(tag)));
-                return 1;
-            }
-        }.execute();
-
+        if (i < 0) {
+            final AppDatabase adb = AppDatabase.getFileDatabase(getApplicationContext());
+            new AsyncTask<Void, Void, Integer>() {
+                @Override
+                protected Integer doInBackground(Void... params) {
+                    adb.eiObject().insertEIObject(new EIObject(name, eiType, amount, EITag.getTag(tag)));
+                    return 1;
+                }
+            }.execute();
+        } else if (i >= 0) {
+            final EIObject obj = EIObject.getAllObjects().get(i);
+            obj.setAmount(amount);
+            obj.setEitype(eiType);
+            obj.setName(name);
+//            obj.setDate(Calendar.getInstance().getTime());
+            obj.setTag(EITag.getTag(tag));
+            final AppDatabase adb = AppDatabase.getFileDatabase(getApplicationContext());
+            new AsyncTask<Void, Void, Integer>() {
+                @Override
+                protected Integer doInBackground(Void... params) {
+                    adb.eiObject().updateEIObject(obj);
+                    return 1;
+                }
+            }.execute();
+        }
 
     }
 

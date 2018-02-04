@@ -10,13 +10,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ListView
+        <com.baoyz.swipemenulistview.SwipeMenuListView
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
-
-        </ListView>
+        </com.baoyz.swipemenulistview.SwipeMenuListView>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

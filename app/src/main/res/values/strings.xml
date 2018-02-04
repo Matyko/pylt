@@ -13,4 +13,5 @@
     <string name="expense">Expense</string>
     <string name="income_base">Income</string>
     <string name="edit">Edit</string>
+    <string name="edit_item">Edit item</string>
 </resources>
