@@ -8,10 +8,12 @@
     <string name="new_item">New Item</string>
     <string name="item_name">Name</string>
     <string name="tag">Tag</string>
-    <string name="amount">Money</string>
+    <string name="amount">Amount</string>
     <string name="save">save</string>
     <string name="expense">Expense</string>
     <string name="income_base">Income</string>
-    <string name="edit">Edit</string>
+    <string name="show_list">Show list</string>
     <string name="edit_item">Edit item</string>
+    <string name="show_lists">Show lists</string>
+    <string name="edit">Edit</string>
 </resources>

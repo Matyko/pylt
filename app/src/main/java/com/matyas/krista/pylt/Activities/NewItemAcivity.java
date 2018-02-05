@@ -8,6 +8,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -70,6 +72,13 @@ public class NewItemAcivity extends AppCompatActivity {
                 }
             }
         });
+
+        String[] data = EITag.getTagNames();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, data);
+        AutoCompleteTextView textView = (AutoCompleteTextView)
+                findViewById(R.id.item_tag);
+        textView.setAdapter(adapter);
     }
 
     @Override
@@ -94,7 +103,7 @@ public class NewItemAcivity extends AppCompatActivity {
         EditText inputName = (EditText) findViewById(R.id.item_name);
         name = inputName.getText().toString();
         if (name.length() < 1) { throw new RuntimeException("No text was added");}
-        EditText inputTag = (EditText) findViewById(R.id.item_tag);
+        AutoCompleteTextView inputTag = (AutoCompleteTextView) findViewById(R.id.item_tag);
         tag = inputTag.getText().toString();
         if (tag.length() < 1) { throw new RuntimeException("No text was added");}
         EditText inputAmount = (EditText) findViewById(R.id.amount);

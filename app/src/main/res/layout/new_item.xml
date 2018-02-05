@@ -27,18 +27,18 @@
             android:layout_height="0dp"
             android:hint="@string/item_name" />
 
-        <EditText android:id="@+id/item_tag"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:hint="@string/tag" />
-
         <EditText android:id="@+id/amount"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:hint="@string/amount"
             android:inputType="number"/>
+
+        <AutoCompleteTextView android:id="@+id/item_tag"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:hint="@string/tag" />
 
         <Switch
             android:id="@+id/income_switch"

@@ -9,16 +9,17 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.ViewUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -200,8 +201,10 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_edit) {
             View[] views = {findViewById(R.id.edit_balance), findViewById(R.id.edit_income), findViewById(R.id.edit_expenses)};
             for (View view : views) {
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_right);
+                animation.setFillBefore(false);
+                view.startAnimation(animation);
                 view.setVisibility(View.VISIBLE);
-                view.animate().alphaBy(100);
             }
         }
 

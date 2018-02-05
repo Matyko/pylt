@@ -79,4 +79,12 @@ public class EITag {
         }
         return objects;
     }
+
+    public static String[] getTagNames() {
+        String[] result = new String[EITag.getTags().size()];
+        for (int i = 0; i < EITag.getTags().size(); i++) {
+             result[i] = EITag.getTags().get(i).getName();
+        }
+        return result;
+    }
 }

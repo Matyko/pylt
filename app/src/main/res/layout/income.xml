@@ -25,7 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/incomeText"
             android:layout_alignParentEnd="true"
-            android:background="@color/colorAccent"
+            android:background="#50000000"
+            android:textColor="@android:color/white"
             android:text="@string/edit" />
 
     </RelativeLayout>
