@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -53,6 +54,28 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Button buttonBalance = (Button) findViewById(R.id.main_balance);
+        Button buttonSettings = (Button) findViewById(R.id.main_settings);
+
+        buttonBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        buttonSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     @Override
@@ -98,7 +121,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_settings) {
-
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -141,13 +166,5 @@ public class MainActivity extends AppCompatActivity
         chart.setDescription(description);
         chart.setCenterText("");
         chart.invalidate();
-        chart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 }
