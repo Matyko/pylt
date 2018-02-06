@@ -4,13 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -18,7 +16,6 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.matyas.krista.pylt.Database.AppDatabase;
 import com.matyas.krista.pylt.EIObjects.EIObject;
-import com.matyas.krista.pylt.EIObjects.EITag;
 import com.matyas.krista.pylt.EIObjects.EIType;
 import com.matyas.krista.pylt.R;
 
@@ -54,7 +51,7 @@ public class ListViewActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            Intent intent = new Intent(ListViewActivity.this, MainActivity.class);
+            Intent intent = new Intent(ListViewActivity.this, BalanceActivity.class);
             startActivity(intent);
             finish();
             return true;

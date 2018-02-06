@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.matyas.krista.pylt.Calculator.Calculator;
 import com.matyas.krista.pylt.Database.AppDatabase;
 import com.matyas.krista.pylt.EIObjects.EIObject;
 import com.matyas.krista.pylt.EIObjects.EITag;
@@ -23,7 +22,6 @@ import com.matyas.krista.pylt.EIObjects.EIType;
 import com.matyas.krista.pylt.R;
 
 import java.util.Arrays;
-import java.util.Calendar;
 
 /**
  * Created by Matyas on 2018.02.03..
@@ -63,7 +61,7 @@ public class NewItemAcivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     saveItem(finalMode);
-                    Intent myIntent = new Intent(NewItemAcivity.this, MainActivity.class);
+                    Intent myIntent = new Intent(NewItemAcivity.this, BalanceActivity.class);
                     NewItemAcivity.this.startActivity(myIntent);
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
@@ -84,7 +82,7 @@ public class NewItemAcivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            Intent intent = new Intent(NewItemAcivity.this, MainActivity.class);
+            Intent intent = new Intent(NewItemAcivity.this, BalanceActivity.class);
             startActivity(intent);
             finish();
             return true;
