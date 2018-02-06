@@ -9,12 +9,31 @@
     tools:showIn="@layout/app_bar_main">
 
     <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/chart"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart_mini"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                />
+
+            <TextView
+                android:layout_marginTop="-30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@string/simple_balance"/>
+
+        </LinearLayout>
 
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

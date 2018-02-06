@@ -1,6 +1,7 @@
 package com.matyas.krista.pylt.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -93,7 +94,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_balance) {
-            // Handle the camera action
+            Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_settings) {
 
         }
@@ -123,35 +126,28 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void createPieChart(EIType type) {
-        PieChart chart = (PieChart) findViewById(R.id.chart);
+        PieChart chart = (PieChart) findViewById(R.id.chart_mini);
         chart.clear();
-        List<EITag> tags = EITag.getTags();
         List<PieEntry> entries = new ArrayList<>();
-        if (type == EIType.OVERALL) {
-            entries.add(new PieEntry((Calculator.getEI(EIType.INCOME)), "Income"));
-            entries.add(new PieEntry((Calculator.getEI(EIType.EXPENSE)), "Expenses"));
-        } else {
-            for (int i = 0; i < tags.size(); i++) {
-                if (tags.get(i).getType().equals(type))
-                    entries.add(new PieEntry(tags.get(i).getAmount(), tags.get(i).getName()));
-            }
-        }
+        entries.add(new PieEntry((Calculator.getEI(EIType.INCOME))));
+        entries.add(new PieEntry((Calculator.getEI(EIType.EXPENSE))));
         PieDataSet dataSet = new PieDataSet(entries, "");
-        dataSet.setValueTextColor(Color.DKGRAY);
-        dataSet.setValueTextSize(15);
+        dataSet.setValueTextColor(Color.TRANSPARENT);
         dataSet.setColors(AppColors.getColors());
         PieData pieData = new PieData(dataSet);
         chart.setData(pieData);
-        chart.setEntryLabelColor(Color.DKGRAY);
         Description description = new Description();
         description.setText("");
         chart.setDescription(description);
-        if (type == EIType.OVERALL) {
-            chart.setCenterText(Long.valueOf((Calculator.getEI(EIType.INCOME)-Calculator.getEI(EIType.EXPENSE))).toString());
-        } else {
-            chart.setCenterText(Long.valueOf(EIObject.getFullAmount(type)).toString() + "\n" + "Total");
-        }
-        chart.setCenterTextColor(Color.DKGRAY);
+        chart.setCenterText("");
         chart.invalidate();
+        chart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }
