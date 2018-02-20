@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -55,8 +56,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Button buttonBalance = (Button) findViewById(R.id.main_balance);
-        Button buttonSettings = (Button) findViewById(R.id.main_settings);
+        LinearLayout buttonBalance = (LinearLayout) findViewById(R.id.main_balance);
+        LinearLayout buttonSettings = (LinearLayout) findViewById(R.id.main_settings);
 
         buttonBalance.setOnClickListener(new View.OnClickListener() {
             @Override
