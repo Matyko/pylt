@@ -101,4 +101,6 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="todo">ToDo</string>
+    <string name="title_activity_todo">todo</string>
+    <string name="shoppinglist">Shopping List</string>
 </resources>
