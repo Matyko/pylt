@@ -53,7 +53,6 @@ public class BalanceActivity extends AppCompatActivity {
             }
         });
 
-        fab.getDrawable().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
         createPieChart(EIType.OVERALL);
         setVisibility();
         setValues();

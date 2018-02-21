@@ -1,6 +1,7 @@
 package com.matyas.krista.pylt.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -16,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -56,13 +58,25 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        LinearLayout buttonBalance = (LinearLayout) findViewById(R.id.main_balance);
-        LinearLayout buttonSettings = (LinearLayout) findViewById(R.id.main_settings);
+        final LinearLayout buttonBalance = (LinearLayout) findViewById(R.id.main_balance);
+        final LinearLayout buttonToDo = (LinearLayout) findViewById(R.id.main_todo);
+        final LinearLayout buttonSettings = (LinearLayout) findViewById(R.id.main_settings);
 
         buttonBalance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonBalance.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.main_animation));
                 Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        buttonToDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonToDo.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.main_animation));
+                Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -71,11 +85,14 @@ public class MainActivity extends AppCompatActivity
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonSettings.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.main_animation));
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
+
+
 
     }
 
@@ -123,6 +140,10 @@ public class MainActivity extends AppCompatActivity
             finish();
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_todo) {
+            Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
             startActivity(intent);
             finish();
         }
