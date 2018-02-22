@@ -20,6 +20,7 @@ import com.matyas.krista.pylt.EIObjects.EIObject;
 import com.matyas.krista.pylt.EIObjects.EITag;
 import com.matyas.krista.pylt.EIObjects.EIType;
 import com.matyas.krista.pylt.R;
+import com.matyas.krista.pylt.ToDo.ShoppingList;
 
 import java.util.Arrays;
 
@@ -82,6 +83,13 @@ public class NewItemAcivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            if (getIntent().getSerializableExtra("Shopping").equals(true)) {
+                Intent intent = new Intent(NewItemAcivity.this, ToDoListActivity.class);
+                intent.putExtra("Card", ShoppingList.getShopCard());
+                startActivity(intent);
+                finish();
+                return true;
+            }
             Intent intent = new Intent(NewItemAcivity.this, BalanceActivity.class);
             startActivity(intent);
             finish();
@@ -119,7 +127,12 @@ public class NewItemAcivity extends AppCompatActivity {
             new AsyncTask<Void, Void, Integer>() {
                 @Override
                 protected Integer doInBackground(Void... params) {
-                    adb.eiObject().insertEIObject(new EIObject(name, eiType, amount, EITag.getTag(tag)));
+                    EIObject obj = new EIObject(name, eiType, amount, EITag.getTag(tag));
+                    if (getIntent().getSerializableExtra("Shopping").equals(true)) {
+                        ShoppingList.getShopItems().add(name);
+                        ShoppingList.getObjects().add(obj);
+                    }
+                    adb.eiObject().insertEIObject(obj);
                     return 1;
                 }
             }.execute();

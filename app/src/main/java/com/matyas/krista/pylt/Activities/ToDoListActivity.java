@@ -47,13 +47,21 @@ public class ToDoListActivity extends AppCompatActivity {
                 EditText editText = (EditText) findViewById(R.id.new_todo_item);
                 FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
                 if (fabMode.equals("add")) {
+                    if (card.getTitle().equals("Shopping List")) {
+                        Intent intent = new Intent(ToDoListActivity.this, NewItemAcivity.class);
+                        intent.putExtra("Shopping", true);
+                        startActivity(intent);
+                        finish();
+                        editText.setText("");
+                        return;
+                    }
                     editText.setVisibility(View.VISIBLE);
                     fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save_black_24dp));
                     fabMode = "save";
                 } else if (fabMode.equals("save")) {
                     if (editText.getText().toString().length() > 1) {
                         for (Card oriCard : Card.getCards()) {
-                            if (oriCard.getTitle().equals(card.getTitle())) {
+                            if (oriCard.getTitle().equals(card.getTitle()) && !card.getTitle().equals("Shopping List")) {
                                 oriCard.getItems().add(editText.getText().toString());
                                 card.addItem(editText.getText().toString());
                             }
@@ -62,6 +70,7 @@ public class ToDoListActivity extends AppCompatActivity {
                     editText.setVisibility(View.GONE);
                     fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_black_24dp));
                     fabMode="add";
+                    editText.setText("");
                 }
 
             }
@@ -150,8 +159,6 @@ public class ToDoListActivity extends AppCompatActivity {
 //                                return 1;
 //                            }
 //                        }.execute();
-                        finish();
-                        startActivity(getIntent());
                         break;
                 }
                 // false : close the menu; true : not close the menu

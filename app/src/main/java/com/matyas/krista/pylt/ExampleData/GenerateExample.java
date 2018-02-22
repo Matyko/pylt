@@ -17,7 +17,6 @@ public class GenerateExample {
     }
 
     private static void generateCards() {
-        ShoppingList.addItem("Eggs", 600);
         Card card1 = new Card("Test");
         Card card2 = new Card("Test");
         card1.addItem("Test");
