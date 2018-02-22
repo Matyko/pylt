@@ -8,22 +8,54 @@
     tools:context="com.matyas.krista.pylt.Activities.ToDoActivity"
     tools:showIn="@layout/activity_todo">
 
-    <LinearLayout
-        android:id="@+id/shopping"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
-        android:background="@color/pink1">
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/todo_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/shopping"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:background="@color/pink1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="@string/shoppinglist"
+                    android:padding="10dp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:alpha="0.5"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp"
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:text="@string/shoppinglist"
-            android:textColor="@android:color/darker_gray"
-            android:padding="10dp"
-            android:textSize="40sp"
-            android:textStyle="bold"/>
-
+            android:layout_height="fill_parent"
+            android:text="@string/add_list_info"
+            android:alpha="0.5"
+            android:textSize="15sp"/>
     </LinearLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

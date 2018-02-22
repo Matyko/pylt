@@ -3,7 +3,6 @@ package com.matyas.krista.pylt.Activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -202,7 +201,7 @@ public class BalanceActivity extends AppCompatActivity {
         if (id == R.id.action_edit) {
             View[] views = {findViewById(R.id.edit_balance), findViewById(R.id.edit_income), findViewById(R.id.edit_expenses)};
             for (View view : views) {
-                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_right);
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
                 animation.setFillBefore(false);
                 view.startAnimation(animation);
                 view.setVisibility(View.VISIBLE);

@@ -32,6 +32,7 @@ import com.matyas.krista.pylt.Database.AppDatabase;
 import com.matyas.krista.pylt.EIObjects.EIObject;
 import com.matyas.krista.pylt.EIObjects.EITag;
 import com.matyas.krista.pylt.EIObjects.EIType;
+import com.matyas.krista.pylt.ExampleData.GenerateExample;
 import com.matyas.krista.pylt.R;
 
 import java.util.ArrayList;

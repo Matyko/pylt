@@ -103,4 +103,8 @@
     <string name="todo">ToDo</string>
     <string name="title_activity_todo">todo</string>
     <string name="shoppinglist">Shopping List</string>
+    <string name="add_list_info">You can add new lists with the plus button</string>
+    <string name="title_activity_to_do_list">ToDoListActivity</string>
+    <string name="create_card">Create new card</string>
+    <string name="title">Title</string>
 </resources>

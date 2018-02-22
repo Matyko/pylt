@@ -10,26 +10,34 @@ import java.util.ArrayList;
  * Created by KristaM on 2018. 02. 21..
  */
 
-public class ShoppingList extends Card {
+public class ShoppingList {
 
-    private String title;
-    private ArrayList<EIObject> items = new ArrayList<>();
+    private static ArrayList<EIObject> objects = new ArrayList<>();
+    private static ArrayList<String> items = new ArrayList<>();
+    private static Card card = new Card("Shopping List");
 
-    public ShoppingList(String title) {
-        super(title);
-        this.title = title;
+    public static Card getShopCard() {
+        card.setItems(getShopItems());
+        return card;
     }
 
-    public void addItem(String item, long value, String tag) {
-        EITag.addTag(item, value, EIType.EXPENSE);
-        this.items.add(new EIObject(item, EIType.EXPENSE, value, EITag.getTag(tag)));
+    public static ArrayList<String> getShopItems() {
+        return items;
     }
 
-    public void removeItem(String itemName) {
-        for (EIObject object : items) {
-            if (object.getName().equals(itemName));
-            items.remove(object);
-            EIObject.getAllObjects().remove(object);
+    public static void addItem(String item, long value) {
+        EITag.addTag("Shopping List Items", value, EIType.EXPENSE);
+        objects.add(new EIObject(item, EIType.EXPENSE, value, EITag.getTag("Shopping List Items")));
+        items.add(item);
+    }
+
+    public static void removeShopItem(String itemName) {
+        for (EIObject object : objects) {
+            if (object.getName().equals(itemName)) {
+                objects.remove(object);
+                items.remove(itemName);
+                EIObject.getAllObjects().remove(object);
+            }
         }
     }
 }

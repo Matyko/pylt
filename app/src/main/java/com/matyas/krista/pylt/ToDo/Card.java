@@ -1,25 +1,26 @@
 package com.matyas.krista.pylt.ToDo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by KristaM on 2018. 02. 21..
  */
 
-public class Card {
+public class Card implements Serializable {
 
     private static ArrayList<Card> cards = new ArrayList<>();
     private static ArrayList<String> tags = new ArrayList<>();
-    private ArrayList<String> items = new ArrayList<>();
+    private ArrayList<String> objects = new ArrayList<>();
     private String title;
     private String tag;
 
     public ArrayList<String> getItems() {
-        return items;
+        return objects;
     }
 
     public void setItems(ArrayList<String> items) {
-        this.items = items;
+        this.objects = items;
     }
 
     public String getTitle() {
@@ -52,14 +53,14 @@ public class Card {
 
     public Card(String title) {
         this.title = title;
-        cards.add(this);
+        if (!title.equals("Shopping List")) {cards.add(this);}
     }
 
     public void addItem(String item) {
-        this.items.add(item);
+        this.objects.add(item);
     }
 
     public void removeItem(String item) {
-        this.items.remove(item);
+        this.objects.remove(item);
     }
 }
