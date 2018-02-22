@@ -12,7 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -34,16 +37,36 @@ public class ToDoListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final Card card = (Card) getIntent().getSerializableExtra("Card");
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+            String fabMode = "add";
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                EditText editText = (EditText) findViewById(R.id.new_todo_item);
+                FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+                if (fabMode.equals("add")) {
+                    editText.setVisibility(View.VISIBLE);
+                    fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save_black_24dp));
+                    fabMode = "save";
+                } else if (fabMode.equals("save")) {
+                    if (editText.getText().toString().length() > 1) {
+                        for (Card oriCard : Card.getCards()) {
+                            if (oriCard.getTitle().equals(card.getTitle())) {
+                                oriCard.getItems().add(editText.getText().toString());
+                                card.addItem(editText.getText().toString());
+                            }
+                        }
+                    }
+                    editText.setVisibility(View.GONE);
+                    fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_black_24dp));
+                    fabMode="add";
+                }
+
             }
         });
 
-        Card card = (Card) getIntent().getSerializableExtra("Card");
         TextView textView = (TextView) findViewById(R.id.todo_title);
         textView.setText(card.getTitle());
         fillList(card);

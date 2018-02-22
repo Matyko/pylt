@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_to_do_list">
 
     <LinearLayout
-        android:id="@+id/list_view_layout"
+        android:id="@+id/list_view_layout_todo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -23,12 +23,20 @@
             android:textStyle="bold"
             android:textSize="30sp"/>
 
+        <EditText
+            android:hint="@string/new_item"
+            android:id="@+id/new_todo_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
         <com.baoyz.swipemenulistview.SwipeMenuListView
             android:id="@+id/list_view_todo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
         </com.baoyz.swipemenulistview.SwipeMenuListView>
+
 
     </LinearLayout>
 

@@ -107,4 +107,6 @@
     <string name="title_activity_to_do_list">ToDoListActivity</string>
     <string name="create_card">Create new card</string>
     <string name="title">Title</string>
+    <string name="edit_card">Edit card</string>
+    <string name="delete">Delete</string>
 </resources>

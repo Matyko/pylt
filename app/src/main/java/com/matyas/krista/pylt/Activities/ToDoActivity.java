@@ -35,8 +35,10 @@ public class ToDoActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(ToDoActivity.this, NewCardActivity.class);
+                intent.putExtra("Mode", "new");
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -95,6 +97,17 @@ public class ToDoActivity extends AppCompatActivity {
                 intent.putExtra("Card", card);
                 startActivity(intent);
                 finish();
+            }
+        });
+        cardBase.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(ToDoActivity.this, NewCardActivity.class);
+                intent.putExtra("Card", card);
+                intent.putExtra("Mode", "edit");
+                startActivity(intent);
+                finish();
+                return false;
             }
         });
         return cardBase;

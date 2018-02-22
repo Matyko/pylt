@@ -131,8 +131,7 @@ public class ListViewActivity extends AppCompatActivity {
                                 return 1;
                             }
                         }.execute();
-                        finish();
-                        startActivity(getIntent());
+
                         break;
                 }
                 // false : close the menu; true : not close the menu
