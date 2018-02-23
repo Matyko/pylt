@@ -1,6 +1,7 @@
 package com.matyas.krista.pylt.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,8 +9,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -47,14 +51,6 @@ public class ToDoListActivity extends AppCompatActivity {
                 EditText editText = (EditText) findViewById(R.id.new_todo_item);
                 FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
                 if (fabMode.equals("add")) {
-                    if (card.getTitle().equals("Shopping List")) {
-                        Intent intent = new Intent(ToDoListActivity.this, NewItemAcivity.class);
-                        intent.putExtra("Shopping", true);
-                        startActivity(intent);
-                        finish();
-                        editText.setText("");
-                        return;
-                    }
                     editText.setVisibility(View.VISIBLE);
                     fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save_black_24dp));
                     fabMode = "save";
@@ -64,6 +60,8 @@ public class ToDoListActivity extends AppCompatActivity {
                             if (oriCard.getTitle().equals(card.getTitle()) && !card.getTitle().equals("Shopping List")) {
                                 oriCard.getItems().add(editText.getText().toString());
                                 card.addItem(editText.getText().toString());
+                            } else if (card.getTitle().equals("Shopping List")) {
+                                buildDialog();
                             }
                         }
                     }
@@ -167,5 +165,37 @@ public class ToDoListActivity extends AppCompatActivity {
         });
     }
 
+    private void buildDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ToDoListActivity.this);
+        alertDialog.setTitle("AMOUNT");
 
+        final EditText input = new EditText(ToDoListActivity.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        input.setHint("Enter the price of the item");
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        alertDialog.setView(input);
+        alertDialog.setIcon(R.drawable.ic_add_black_24dp);
+
+        alertDialog.setPositiveButton("SAVE",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String amount = input.getText().toString();
+                        startActivity(getIntent());
+                        finish();
+                    }
+                });
+
+        alertDialog.setNegativeButton("CANCEL",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        alertDialog.show();
+    }
 }
+

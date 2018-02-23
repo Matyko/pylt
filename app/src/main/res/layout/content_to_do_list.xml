@@ -28,6 +28,8 @@
             android:id="@+id/new_todo_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:visibility="gone"/>
 
         <com.baoyz.swipemenulistview.SwipeMenuListView
